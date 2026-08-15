@@ -1,0 +1,63 @@
+name: PRAHARI-AI CI
+
+on:
+  push:
+    branches: ["main", "dev"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgis/postgis:15-3.3
+        env:
+          POSTGRES_USER: prahari
+          POSTGRES_PASSWORD: prahari_pass
+          POSTGRES_DB: prahari_db
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U prahari -d prahari_db"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          cd backend
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run test suite (offline — all HTTP calls mocked)
+        env:
+          DATABASE_URL: postgresql+asyncpg://prahari:prahari_pass@localhost:5432/prahari_db
+          BHUVAN_TOKEN: ""
+          FIRMS_MAP_KEY: ""
+          PILOT_DISTRICT: Wayanad
+        run: |
+          cd backend
+          pytest tests/ -v --tb=short
+
+  docker-build:
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build backend Docker image
+        run: docker build -t prahari-backend ./backend
+
+      - name: Build frontend Docker image
+        run: docker build -t prahari-frontend ./frontend

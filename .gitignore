@@ -1,0 +1,60 @@
+# ─── Secrets ─────────────────────────────────────────────────────────────────
+# CRITICAL: Never commit the .env file — it contains API tokens and DB credentials.
+.env
+*.key
+*.pem
+secrets/
+
+# ─── Python ──────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+venv/
+.venv/
+env/
+ENV/
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# ─── Node / Frontend ─────────────────────────────────────────────────────────
+node_modules/
+frontend/dist/
+frontend/.vite/
+*.local
+
+# ─── Docker ──────────────────────────────────────────────────────────────────
+*.log
+docker-compose.override.yml
+
+# ─── Database ─────────────────────────────────────────────────────────────────
+*.sql.gz
+*.dump
+pg_data/
+
+# ─── OS ───────────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# ─── IDEs ─────────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.code-workspace
+
+# ─── Demo / Data ──────────────────────────────────────────────────────────────
+# Exclude large raw data downloads but keep processed seeded data scripts
+data/raw/
+data/downloads/

@@ -1,0 +1,13 @@
+SlNo,Station,Agency,State LGD Code,State,District LGD Code,District,Tehsil,Block,Village,River,Basin,Tributary,Subtributary,SubSubtributary,Local River,Latitude,Longitude,Is_DischargeDataAvailable,RL_of_zeroGauge,MeanSeaLevel,Data Acquisition Time,River Water Level Telemetry Hourly (meter)
+1,Bhavani Sagar Dam ,CWC,33,Tamil Nadu,573,Erode,SATHYAMANGALAM,-,-,Cauvery,Cauvery,Bhavani,-,-,Bhavani,11.47000000,77.10000000,No,0,840.00,01-11-1970 04:00,463.463
+2,Harangi Reservoir,CWC,29,Karnataka,541,Kodagu,SOMVARPET,-,-,Cauvery,Cauvery,Harangi,-,-,Harangi,12.49380000,75.90541389,No,0.0000,838.00,30-12-1969 19:00,166.226
+3,Hemavathy Reservoir,CWC,29,Karnataka,539,Hassan,CHANNARAYAPATNA,-,-,Cauvery,Cauvery,Hemavathi,-,-,Hemavathi,12.82196111,76.05423333,Yes,0.0000,868.00,11-09-1976 14:00,729.755
+4,Kabini Reservoir,CWC,29,Karnataka,545,Mysore,HEGGADADEVANKOTE,-,-,Cauvery,Cauvery,Kabini,-,-,Kabini,11.97339167,76.35275000,No,0.0000,664.00,01-01-1970 13:00,995.434
+5,Kabini Reservoir,CWC,29,Karnataka,545,Mysore,HEGGADADEVANKOTE,-,-,Cauvery,Cauvery,Kabini,-,-,Kabini,11.97339167,76.35275000,No,0.0000,664.00,04-11-1970 19:00,1333.4331
+6,KODAGANAR DAM,CWC,33,Tamil Nadu,572,Dindigul,Vedasandur,-,-,Cauvery,Cauvery,Kodaganar,-,-,Kodaganar,10.59305556,77.97194444,Yes,192.0000,0,03-02-1970 08:00,805.879
+7,KOLLEGAL,CWC,29,Karnataka,531,Chamarajanagar,KOLLEGAL,-,-,Cauvery,Cauvery,-,-,-,Cauvery,12.18944444,77.10194444,Yes,622.0000,622.00,25-12-1970 07:00,673.249
+8,MUSIRI,CWC,33,Tamil Nadu,591,Tiruchirappalli,MUSIRI,-,-,Cauvery,Cauvery,-,-,-,Cauvery,10.93805556,78.44027778,Yes,78.0000,92.00,20-07-1977 05:00,81.17
+9,SRI RANGAM,CWC,33,Tamil Nadu,591,Tiruchirappalli,TIRUCHIRAPPALLI,-,-,Cauvery,Cauvery,-,-,-,Cauvery,10.84722222,78.68888889,No,0.0000,0,12-02-1970 04:00,31.878
+10,THENGUMARAHADA,CWC,33,Tamil Nadu,587,Nilgiris,Kotagiri,-,-,Cauvery,Cauvery,Bhavani,Moyar,-,Moyar,11.57277778,76.91916667,Yes,336.6500,345.00,27-07-1970 22:00,1052.223
+11,UPPER ANICUT,CWC,33,Tamil Nadu,591,Tiruchirappalli,TIRUCHIRAPPALLI,-,-,Cauvery,Cauvery,-,-,-,Cauvery,10.88861111,78.58000000,Yes,72.6000,0,01-06-1973 08:00,72
+12,VADAMADURAI,CWC,33,Tamil Nadu,578,Madurai,MADURAI SOUTH,-,-,Cauvery,Cauvery,Kodaganar,-,-,Kodaganar,10.46138889,78.05333333,No,0.0000,0,21-05-1970 00:00,97.82
