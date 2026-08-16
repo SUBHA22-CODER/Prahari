@@ -183,13 +183,6 @@ Access services:
 
 ---
 
-## 🏆 Presentation & Presentation Cheat Sheets
-
-For full SIH Grand Finale presentation scripts and judge defense cheat sheets, see our docs:
-- 📖 [SIH Presentation Guide](C:/Users/Subha%20Prasana%20Parida/.gemini/antigravity-ide/brain/cee6fb8f-0336-4fe3-8972-89ab54a6470f/sih_judge_presentation_guide.md) — Opening pitch, workflow story, and live demo order.
-- 💻 [SIH Technical Q&A Masterclass](C:/Users/Subha%20Prasana%20Parida/.gemini/antigravity-ide/brain/cee6fb8f-0336-4fe3-8972-89ab54a6470f/sih_technical_qna_masterclass.md) — Architecture, PostGIS, and resilience questions.
-- 🎓 [SIH IIT Professor Scenarios](C:/Users/Subha%20Prasana%20Parida/.gemini/antigravity-ide/brain/cee6fb8f-0336-4fe3-8972-89ab54a6470f/sih_iit_professor_scenarios.md) — Advanced scenario-based grilling & defense.
-- 🏆 [SIH Master Presentation Bible](C:/Users/Subha%20Prasana%20Parida/.gemini/antigravity-ide/brain/cee6fb8f-0336-4fe3-8972-89ab54a6470f/sih_master_presentation_bible.md) — Complete unified presentation playbook.
 
 ---
 
