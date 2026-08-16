@@ -18,7 +18,8 @@ class FeedbackRequest(BaseModel):
     alert_id: str = "PRAHARI-W14-001"
     predicted_risk: float = 85.0
     predicted_zone: str = "Meppadi"
-    actual_outcome: str  # 'yes' | 'no' | 'partial'
+    ward_name: str = ""
+    actual_outcome: str
     notes: str = ""
 
 
@@ -31,18 +32,23 @@ async def submit_feedback(
     One-tap official feedback endpoint.
     Includes instant in-memory fallback to avoid DB connection timeouts.
     """
-    outcome_map = {
-        "yes": ("Evacuation Executed (Landslide Occurred)", "Positive Reinforcement (+5% Weight)"),
-        "no": ("False Alarm (No Event)", "Negative Penalty (-10% Weight)"),
-        "partial": ("Partial Event (Monitored)", "Partial Alignment (No Weight Change)")
-    }
-    
-    label, fb_type = outcome_map.get(payload.actual_outcome.lower(), ("Evacuation Executed (Landslide Occurred)", "Positive Reinforcement (+5% Weight)"))
+    raw = payload.actual_outcome.lower().strip()
+    if "false" in raw or raw == "no":
+        label = "False Alarm (No Event)"
+        fb_type = "Negative Penalty (-10% Weight)"
+    elif "partial" in raw:
+        label = "Partial Event (Monitored)"
+        fb_type = "Partial Alignment (No Weight Change)"
+    else:
+        label = "Evacuation Executed (Landslide Occurred)"
+        fb_type = "Positive Reinforcement (+5% Weight)"
+
+    ward_display = payload.ward_name if payload.ward_name else (payload.predicted_zone if payload.predicted_zone else "Ward 14 (Meppadi)")
 
     entry = {
         "id": f"FB-{uuid.uuid4().hex[:6].upper()}",
         "alert_id": payload.alert_id,
-        "ward_name": payload.predicted_zone if payload.predicted_zone else "Ward 14 (Meppadi)",
+        "ward_name": ward_display,
         "official_role": "Duty Officer (Web Dashboard)",
         "official_notes": payload.notes if payload.notes else f"Direct verification submission ({payload.actual_outcome.upper()})",
         "actual_outcome": label,
@@ -53,16 +59,17 @@ async def submit_feedback(
     EMAIL_FEEDBACKS.insert(0, entry)
 
     # Attempt async DB record in background (resilient if DB offline)
-    try:
-        await record_feedback(
-            db,
-            alert_id=payload.alert_id,
-            predicted_risk=payload.predicted_risk,
-            predicted_zone=payload.predicted_zone,
-            actual_outcome=payload.actual_outcome,
-        )
-    except Exception as e:
-        print(f"[Feedback API] DB record skipped ({e}). Preserved in fast memory log.")
+    if db:
+        try:
+            await record_feedback(
+                db,
+                alert_id=payload.alert_id,
+                predicted_risk=payload.predicted_risk,
+                predicted_zone=payload.predicted_zone,
+                actual_outcome=payload.actual_outcome,
+            )
+        except Exception as e:
+            print(f"[Feedback API] DB record skipped ({e}). Preserved in fast memory log.")
 
     return {"status": "recorded", "feedback_id": entry["id"], "entry": entry}
 

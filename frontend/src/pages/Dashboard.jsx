@@ -22,8 +22,8 @@ export default function Dashboard({ selectedDistrict }) {
         const data = await api.getDashboard(selectedDistrict);
         if (isMounted) {
           setDashboardData(data);
-          // Set Ward 14 (Meppadi - Critical) as initial selected ward for max judge impact
-          const initialWard = data.wards?.find(w => w.ward_id === 'W14') || data.wards?.[0];
+          // Set highest critical ward for the selected district as initial selected ward
+          const initialWard = data.wards?.find(w => w.risk_score >= 70) || data.wards?.[0];
           setSelectedWard(initialWard);
         }
       } catch (err) {

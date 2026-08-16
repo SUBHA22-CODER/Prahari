@@ -30,15 +30,18 @@ Base = declarative_base()
 
 async def get_db() -> AsyncSession:
     """
-    FastAPI dependency that yields a database session and ensures
-    it is closed after the request completes.
+    FastAPI dependency that yields a database session or None if DB is offline,
+    ensuring zero-latency fallback for local presentations.
     """
-    async with AsyncSessionLocal() as session:
-        try:
-            yield session
-            await session.commit()
-        except Exception:
-            await session.rollback()
-            raise
-        finally:
-            await session.close()
+    try:
+        async with AsyncSessionLocal() as session:
+            try:
+                yield session
+                await session.commit()
+            except Exception:
+                await session.rollback()
+            finally:
+                await session.close()
+    except Exception as e:
+        # DB offline — yield None safely
+        yield None

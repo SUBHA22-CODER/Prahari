@@ -10,13 +10,13 @@ export default function BacktestPage({ selectedDistrict = 'wayanad' }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Auto-select event matching district if changed
+    // Auto-select event matching selected district
     if (selectedDistrict === 'cachar') setSelectedEventId('cachar-2022');
-    else if (selectedDistrict === 'kamrup') setSelectedEventId('kamrup-2020');
+    else if (selectedDistrict === 'kamrup') setSelectedEventId('kamrup-2022');
     else if (selectedDistrict === 'shimla') setSelectedEventId('shimla-2023');
-    else if (selectedDistrict === 'idukki') setSelectedEventId('idukki-2021');
-    else if (selectedDistrict === 'dibrugarh') setSelectedEventId('dibrugarh-2021');
-    else if (selectedDistrict === 'pathanamthitta') setSelectedEventId('pathanamthitta-2022');
+    else if (selectedDistrict === 'idukki') setSelectedEventId('idukki-2020');
+    else if (selectedDistrict === 'dibrugarh') setSelectedEventId('dibrugarh-2020');
+    else if (selectedDistrict === 'pathanamthitta') setSelectedEventId('pathanamthitta-2018');
     else if (selectedDistrict === 'wayanad') setSelectedEventId('wayanad-2024');
   }, [selectedDistrict]);
 

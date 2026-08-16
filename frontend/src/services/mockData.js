@@ -13,6 +13,121 @@ export const PILOT_DISTRICTS = [
   { id: 'shimla', name: 'Shimla', state: 'Himachal Pradesh', code: 'HP-SML', lat: 31.104, lng: 77.173, zoom: 11 }
 ];
 
+export function getDistrictWards(districtId = 'wayanad') {
+  const dist = PILOT_DISTRICTS.find(d => d.id === districtId) || PILOT_DISTRICTS[0];
+  
+  if (dist.id === 'wayanad') {
+    return MOCK_WARDS;
+  }
+
+  const wardConfigs = {
+    kamrup: [
+      { id: 'W04', name: 'Ward 04 (Chandmari / Zoo Road)', score: 85, band: 'CRITICAL', pop: 3420, action: 'EVACUATE URBAN FLASH FLOOD ZONE', dx: 0.01, dy: 0.01 },
+      { id: 'W12', name: 'Ward 12 (Guwahati Club / Dispur)', score: 78, band: 'CRITICAL', pop: 4100, action: 'PREPARE EVACUATION OF LOW-LYING DISPUR', dx: -0.01, dy: -0.01 },
+      { id: 'W08', name: 'Ward 08 (Jalukbari / Pandu)', score: 74, band: 'CRITICAL', pop: 2900, action: 'MONITOR BRAHMAPUTRA EMBANKMENT BREACH', dx: -0.02, dy: 0.02 },
+      { id: 'W01', name: 'Ward 01 (Bharalumukh / Fancy Bazar)', score: 71, band: 'CRITICAL', pop: 5200, action: 'ISSUE URBAN WATERLOGGING ADVISORY', dx: 0.02, dy: -0.02 },
+      { id: 'W06', name: 'Ward 06 (Ganeshguri / Narengi)', score: 55, band: 'ALERT', pop: 3800, action: 'CLEAR DRAINAGE OUTFLOW CORRIDORS', dx: 0.03, dy: 0.01 },
+      { id: 'W10', name: 'Ward 10 (Hatigaon / Kahilipara)', score: 48, band: 'ALERT', pop: 2600, action: 'SURVEIL HILLSIDE EROSION', dx: -0.03, dy: -0.01 },
+      { id: 'W03', name: 'Ward 03 (Khanapara / GS Road)', score: 34, band: 'MONITOR', pop: 1800, action: 'ROUTINE TELEMETRY SURVEILLANCE', dx: 0.01, dy: -0.03 },
+      { id: 'W15', name: 'Ward 15 (Maligaon / Gotanagar)', score: 28, band: 'MONITOR', pop: 2100, action: 'NORMAL MONITORING', dx: -0.01, dy: 0.03 }
+    ],
+    dibrugarh: [
+      { id: 'W03', name: 'Ward 03 (Brahmaputra Embankment / Maijan)', score: 84, band: 'CRITICAL', pop: 2950, action: 'EVACUATE EMBANKMENT SETTLEMENTS', dx: 0.01, dy: 0.01 },
+      { id: 'W07', name: 'Ward 07 (Chowkidinghee / Town)', score: 75, band: 'CRITICAL', pop: 3600, action: 'PREPARE FLOOD RELIEF SHELTERS', dx: -0.01, dy: -0.01 },
+      { id: 'W01', name: 'Ward 01 (Graham Bazar / Tinkunia)', score: 62, band: 'ALERT', pop: 2100, action: 'MONITOR DIB RU RIVER OUTFLOW', dx: -0.02, dy: 0.02 },
+      { id: 'W05', name: 'Ward 05 (Naliapool / Milan Nagar)', score: 58, band: 'ALERT', pop: 4100, action: 'ISSUE RIVERBANK INUNDATION WARNING', dx: 0.02, dy: -0.02 },
+      { id: 'W02', name: 'Ward 02 (Amolapatty / Santipoor)', score: 38, band: 'MONITOR', pop: 2800, action: 'STANDBY EMERGENCY BARRIERS', dx: 0.03, dy: 0.01 },
+      { id: 'W09', name: 'Ward 09 (Bairagimath / Kadamoni)', score: 33, band: 'MONITOR', pop: 2300, action: 'SURVEIL CANAL WATER LEVELS', dx: -0.03, dy: -0.01 },
+      { id: 'W04', name: 'Ward 04 (Barbari / Medical College)', score: 29, band: 'MONITOR', pop: 3100, action: 'ROUTINE SURVEILLANCE', dx: 0.01, dy: -0.03 },
+      { id: 'W08', name: 'Ward 08 (Jalannagar / Boiragimath)', score: 25, band: 'MONITOR', pop: 1900, action: 'NORMAL MONITORING', dx: -0.01, dy: 0.03 }
+    ],
+    shimla: [
+      { id: 'W05', name: 'Ward 05 (Summer Hill / University)', score: 86, band: 'CRITICAL', pop: 2150, action: 'EVACUATE SLOPE COLLAPSE ZONE', dx: 0.01, dy: 0.01 },
+      { id: 'W11', name: 'Ward 11 (Mall Road / Ridge)', score: 79, band: 'CRITICAL', pop: 3100, action: 'PREPARE CLOUDBURST RELIEF CAMPS', dx: -0.01, dy: -0.01 },
+      { id: 'W02', name: 'Ward 02 (Sanjauli / Dhalli)', score: 73, band: 'CRITICAL', pop: 2700, action: 'CLOSE VULNERABLE HILL ROADS', dx: -0.02, dy: 0.02 },
+      { id: 'W08', name: 'Ward 08 (Chotta Shimla / Jakhoo)', score: 68, band: 'ALERT', pop: 1900, action: 'ISSUE LANDSLIDE SLIP ADVISORY', dx: 0.02, dy: -0.02 },
+      { id: 'W01', name: 'Ward 01 (Totu / Boileauganj)', score: 62, band: 'ALERT', pop: 2400, action: 'SURVEIL DRAINAGE CHANNELS', dx: 0.03, dy: 0.01 },
+      { id: 'W04', name: 'Ward 04 (Kasumpti / Panthaghati)', score: 55, band: 'ALERT', pop: 3200, action: 'MONITOR SOIL PRE-SATURATION', dx: -0.03, dy: -0.01 },
+      { id: 'W07', name: 'Ward 07 (New Shimla / BCS)', score: 48, band: 'ALERT', pop: 2800, action: 'ROUTINE MONITORING', dx: 0.01, dy: -0.03 },
+      { id: 'W10', name: 'Ward 10 (Lakkar Bazar / Kaithu)', score: 29, band: 'MONITOR', pop: 1700, action: 'NORMAL BASELINE', dx: -0.01, dy: 0.03 }
+    ],
+    cachar: [
+      { id: 'W06', name: 'Ward 06 (Barak Riverbank / Tarapur)', score: 83, band: 'CRITICAL', pop: 3100, action: 'EVACUATE BARAK EMBANKMENT HOUSES', dx: 0.01, dy: 0.01 },
+      { id: 'W02', name: 'Ward 02 (Rangirkhari / Silchar Town)', score: 77, band: 'CRITICAL', pop: 4200, action: 'PREPARE TOWN INUNDATION CAMPS', dx: -0.01, dy: -0.01 },
+      { id: 'W08', name: 'Ward 08 (Ambicapatty / Public School)', score: 71, band: 'CRITICAL', pop: 2600, action: 'DEPLOY EMERGENCY PUMPING UNITS', dx: -0.02, dy: 0.02 },
+      { id: 'W04', name: 'Ward 04 (Malugram / Ghoniwala)', score: 61, band: 'ALERT', pop: 3500, action: 'ISSUE SLUICE GATE OVERFLOW ADVISORY', dx: 0.02, dy: -0.02 },
+      { id: 'W01', name: 'Ward 01 (Meherpur / NIT Road)', score: 53, band: 'ALERT', pop: 2900, action: 'MONITOR WATERLOGGING CORRIDORS', dx: 0.03, dy: 0.01 },
+      { id: 'W05', name: 'Ward 05 (Public School Road / Sonai)', score: 47, band: 'ALERT', pop: 2100, action: 'STANDBY DISASTER SURVEILLANCE', dx: -0.03, dy: -0.01 },
+      { id: 'W03', name: 'Ward 03 (Singari / Kanakpur)', score: 33, band: 'MONITOR', pop: 1900, action: 'ROUTINE SURVEILLANCE', dx: 0.01, dy: -0.03 },
+      { id: 'W07', name: 'Ward 07 (Srikona / Cantonment)', score: 26, band: 'MONITOR', pop: 1500, action: 'NORMAL MONITORING', dx: -0.01, dy: 0.03 }
+    ],
+    idukki: [
+      { id: 'W12', name: 'Ward 12 (Munnar / Gap Road)', score: 87, band: 'CRITICAL', pop: 2400, action: 'EVACUATE HIGH-SLOPE TEA PLANTATION HOUSES', dx: 0.01, dy: 0.01 },
+      { id: 'W04', name: 'Ward 04 (Kattappana / Town)', score: 78, band: 'CRITICAL', pop: 3300, action: 'PREPARE HILLSIDE LANDSLIDE SHELTERS', dx: -0.01, dy: -0.01 },
+      { id: 'W08', name: 'Ward 08 (Cheruthoni Dam Site)', score: 72, band: 'CRITICAL', pop: 1800, action: 'COORDINATE SPILLWAY OUTFLOW ADVISORY', dx: -0.02, dy: 0.02 },
+      { id: 'W01', name: 'Ward 01 (Adimali / Valara)', score: 63, band: 'ALERT', pop: 2700, action: 'ISSUE GHAT ROAD TRAFFIC RESTRICTION', dx: 0.02, dy: -0.02 },
+      { id: 'W06', name: 'Ward 06 (Nedumkandam / Thookkupalam)', score: 54, band: 'ALERT', pop: 2100, action: 'SURVEIL STREAM BANK EROSION', dx: 0.03, dy: 0.01 },
+      { id: 'W03', name: 'Ward 03 (Vagamon / Elappara)', score: 46, band: 'ALERT', pop: 1900, action: 'STANDBY EMERGENCY CIVIL DEFENSE', dx: -0.03, dy: -0.01 },
+      { id: 'W09', name: 'Ward 09 (Thodupuzha / Vannappuram)', score: 36, band: 'MONITOR', pop: 3500, action: 'ROUTINE SURVEILLANCE', dx: 0.01, dy: -0.03 },
+      { id: 'W05', name: 'Ward 05 (Peermade / Vandiperiyar)', score: 27, band: 'MONITOR', pop: 1600, action: 'NORMAL BASELINE', dx: -0.01, dy: 0.03 }
+    ],
+    pathanamthitta: [
+      { id: 'W08', name: 'Ward 08 (Ranni / Pamba Basin)', score: 85, band: 'CRITICAL', pop: 2900, action: 'EVACUATE PAMBA RIVERBANK HOUSEHOLDS', dx: 0.01, dy: 0.01 },
+      { id: 'W03', name: 'Ward 03 (Konni / Elephant Reserve)', score: 76, band: 'CRITICAL', pop: 2200, action: 'PREPARE FLASH FLOOD RELIEF CAMPS', dx: -0.01, dy: -0.01 },
+      { id: 'W05', name: 'Ward 05 (Adoor / Koodal)', score: 71, band: 'CRITICAL', pop: 3600, action: 'ISSUE LOW-LAND INUNDATION ADVISORY', dx: -0.02, dy: 0.02 },
+      { id: 'W01', name: 'Ward 01 (Thiruvalla / Manimala Basin)', score: 62, band: 'ALERT', pop: 4100, action: 'DEPLOY EMERGENCY BARRIERS AT RIVERBANKS', dx: 0.02, dy: -0.02 },
+      { id: 'W06', name: 'Ward 06 (Mallappally / Anicadu)', score: 53, band: 'ALERT', pop: 2500, action: 'SURVEIL CANAL RUNOFF LEVELS', dx: 0.03, dy: 0.01 },
+      { id: 'W04', name: 'Ward 04 (Kozhencherry / Aranmula)', score: 45, band: 'ALERT', pop: 2800, action: 'MONITOR PRE-SATURATION INDEX', dx: -0.03, dy: -0.01 },
+      { id: 'W02', name: 'Ward 02 (Pandalam / Kulanada)', score: 33, band: 'MONITOR', pop: 3100, action: 'ROUTINE SURVEILLANCE', dx: 0.01, dy: -0.03 },
+      { id: 'W07', name: 'Ward 07 (Seethathode / Moozhiyar)', score: 28, band: 'MONITOR', pop: 1400, action: 'NORMAL BASELINE', dx: -0.01, dy: 0.03 }
+    ]
+  };
+
+  const cfgList = wardConfigs[dist.id] || wardConfigs['kamrup'];
+
+  return cfgList.map(cfg => {
+    const lat = dist.lat + cfg.dy;
+    const lng = dist.lng + cfg.dx;
+    return {
+      ward_id: cfg.id,
+      ward_name: cfg.name,
+      district: dist.name,
+      risk_score: cfg.score,
+      risk_band: cfg.band,
+      confidence: Math.floor(80 + Math.random() * 10),
+      contributions: {
+        rainfall: Math.floor(cfg.score * 0.38),
+        river_trend: Math.floor(cfg.score * 0.26),
+        slope_saturation: Math.floor(cfg.score * 0.18),
+        historical_incidents: Math.floor(cfg.score * 0.18)
+      },
+      exposure: {
+        population: cfg.pop,
+        schools: Math.floor(cfg.pop / 500) + 1,
+        hospitals: Math.floor(cfg.pop / 1500) + 1,
+        shelters: Math.floor(cfg.pop / 1000) + 1
+      },
+      recommended_action: cfg.action,
+      supporting_actions: [
+        `Prepare local relief shelters in ${cfg.name}`,
+        'Deploy emergency response & civil defense units',
+        'Issue targeted public warning alert via CAP'
+      ],
+      coordinates: [lat, lng],
+      geometry: {
+        type: 'Polygon',
+        coordinates: [[
+          [lng - 0.02, lat - 0.02],
+          [lng + 0.02, lat - 0.02],
+          [lng + 0.02, lat + 0.02],
+          [lng - 0.02, lat + 0.02],
+          [lng - 0.02, lat - 0.02]
+        ]]
+      }
+    };
+  });
+}
+
 export const MOCK_WARDS = [
   {
     ward_id: 'W14',
@@ -309,6 +424,53 @@ export const MOCK_WARDS = [
   }
 ];
 
+export function getDistrictExposurePoints(districtId = 'wayanad') {
+  const dist = PILOT_DISTRICTS.find(d => d.id === districtId) || PILOT_DISTRICTS[0];
+  
+  if (dist.id === 'wayanad') {
+    return MOCK_EXPOSURE_POINTS;
+  }
+
+  const exposureProfiles = {
+    kamrup: [
+      { id: 'exp-kmr-1', name: 'Chandmari Higher Secondary School', type: 'school', ward_id: 'W04', lat: dist.lat + 0.012, lng: dist.lng + 0.011, capacity: 750 },
+      { id: 'exp-kmr-2', name: 'Guwahati Medical College & Hospital (GMCH)', type: 'hospital', ward_id: 'W12', lat: dist.lat - 0.008, lng: dist.lng - 0.009, beds: 500 },
+      { id: 'exp-kmr-3', name: 'Dispur Emergency Relief Shelter', type: 'shelter', ward_id: 'W12', lat: dist.lat - 0.011, lng: dist.lng - 0.012, capacity: 400 },
+      { id: 'exp-kmr-4', name: 'Jalukbari Primary Health Centre', type: 'hospital', ward_id: 'W08', lat: dist.lat - 0.018, lng: dist.lng + 0.019, beds: 45 },
+      { id: 'exp-kmr-5', name: 'Cotton University Emergency Shelter', type: 'school', ward_id: 'W01', lat: dist.lat + 0.019, lng: dist.lng - 0.018, capacity: 900 }
+    ],
+    dibrugarh: [
+      { id: 'exp-dib-1', name: 'Assam Medical College & Hospital (AMCH)', type: 'hospital', ward_id: 'W04', lat: dist.lat + 0.008, lng: dist.lng - 0.028, beds: 400 },
+      { id: 'exp-dib-2', name: 'Maijan Embankment Relief Camp', type: 'shelter', ward_id: 'W03', lat: dist.lat + 0.011, lng: dist.lng + 0.009, capacity: 600 },
+      { id: 'exp-dib-3', name: 'Chowkidinghee Higher Secondary School', type: 'school', ward_id: 'W07', lat: dist.lat - 0.009, lng: dist.lng - 0.011, capacity: 550 },
+      { id: 'exp-dib-4', name: 'Graham Bazar Primary Health Center', type: 'hospital', ward_id: 'W01', lat: dist.lat - 0.018, lng: dist.lng + 0.018, beds: 30 }
+    ],
+    shimla: [
+      { id: 'exp-sml-1', name: 'Indira Gandhi Medical College (IGMC Shimla)', type: 'hospital', ward_id: 'W11', lat: dist.lat - 0.008, lng: dist.lng - 0.009, beds: 350 },
+      { id: 'exp-sml-2', name: 'Himachal Pradesh University Relief Shelter', type: 'school', ward_id: 'W05', lat: dist.lat + 0.011, lng: dist.lng + 0.011, capacity: 800 },
+      { id: 'exp-sml-3', name: 'Sanjauli Civil Hospital', type: 'hospital', ward_id: 'W02', lat: dist.lat - 0.019, lng: dist.lng + 0.018, beds: 60 },
+      { id: 'exp-sml-4', name: 'Chotta Shimla Govt Senior Secondary School', type: 'school', ward_id: 'W08', lat: dist.lat + 0.018, lng: dist.lng - 0.019, capacity: 450 }
+    ],
+    cachar: [
+      { id: 'exp-cac-1', name: 'Silchar Civil Hospital', type: 'hospital', ward_id: 'W02', lat: dist.lat - 0.009, lng: dist.lng - 0.011, beds: 200 },
+      { id: 'exp-cac-2', name: 'Tarapur Barak Embankment Shelter', type: 'shelter', ward_id: 'W06', lat: dist.lat + 0.011, lng: dist.lng + 0.009, capacity: 500 },
+      { id: 'exp-cac-3', name: 'NIT Silchar Disaster Response Center', type: 'school', ward_id: 'W01', lat: dist.lat + 0.028, lng: dist.lng + 0.011, capacity: 700 }
+    ],
+    idukki: [
+      { id: 'exp-idk-1', name: 'Munnar High Altitude Relief Hospital', type: 'hospital', ward_id: 'W12', lat: dist.lat + 0.011, lng: dist.lng + 0.009, beds: 80 },
+      { id: 'exp-idk-2', name: 'Kattappana St. George Higher Secondary School', type: 'school', ward_id: 'W04', lat: dist.lat - 0.009, lng: dist.lng - 0.011, capacity: 600 },
+      { id: 'exp-idk-3', name: 'Cheruthoni Dam Emergency Operations Center', type: 'shelter', ward_id: 'W08', lat: dist.lat - 0.018, lng: dist.lng + 0.019, capacity: 350 }
+    ],
+    pathanamthitta: [
+      { id: 'exp-pta-1', name: 'Ranni Pamba Relief Shelter', type: 'shelter', ward_id: 'W08', lat: dist.lat + 0.011, lng: dist.lng + 0.009, capacity: 650 },
+      { id: 'exp-pta-2', name: 'Konni Govt General Hospital', type: 'hospital', ward_id: 'W03', lat: dist.lat - 0.009, lng: dist.lng - 0.011, beds: 120 },
+      { id: 'exp-pta-3', name: 'Adoor St. Mary High School', type: 'school', ward_id: 'W05', lat: dist.lat - 0.018, lng: dist.lng + 0.019, capacity: 500 }
+    ]
+  };
+
+  return exposureProfiles[dist.id] || exposureProfiles['kamrup'];
+}
+
 export const MOCK_EXPOSURE_POINTS = [
   { id: 'exp-1', name: 'Meppadi Higher Secondary School', type: 'school', ward_id: 'W14', lat: 11.553, lng: 76.126, capacity: 600 },
   { id: 'exp-2', name: 'Vellarimala Primary Health Center', type: 'hospital', ward_id: 'W14', lat: 11.550, lng: 76.122, beds: 25 },
@@ -506,37 +668,173 @@ export const MOCK_ALERTS = [
   }
 ];
 
-export const MOCK_BACKTEST = {
-  events_list: [
-    { id: 'wayanad-2024', title: 'Wayanad July 2024 (Landslides & Floods)' },
-    { id: 'kerala-2018', title: 'Kerala August 2018 (Great Floods)' }
-  ],
-  active_event: {
-    id: 'wayanad-2024',
-    title: 'Wayanad Landslides & Floods (July 2024)',
-    district: 'Wayanad',
-    critical_threshold: 70,
-    critical_crossed: true,
-    lead_time_hours: 18,
-    official_event_time: '2024-07-30T02:00:00Z',
-    critical_crossed_time: '2024-07-29T08:00:00Z',
-    summary: 'PRAHARI-AI risk fusion engine crossed the Critical threshold 18 hours prior to official NDRF deployment and event confirmation.',
-    timeline: [
-      { time: '2024-07-28 00:00', risk_score: 24, rainfall_mm: 35, threshold: 70 },
-      { time: '2024-07-28 06:00', risk_score: 32, rainfall_mm: 58, threshold: 70 },
-      { time: '2024-07-28 12:00', risk_score: 41, rainfall_mm: 92, threshold: 70 },
-      { time: '2024-07-28 18:00', risk_score: 53, rainfall_mm: 140, threshold: 70 },
-      { time: '2024-07-29 00:00', risk_score: 62, rainfall_mm: 195, threshold: 70 },
-      { time: '2024-07-29 06:00', risk_score: 68, rainfall_mm: 260, threshold: 70 },
-      { time: '2024-07-29 08:00', risk_score: 74, rainfall_mm: 310, threshold: 70, is_threshold_cross: true },
-      { time: '2024-07-29 12:00', risk_score: 83, rainfall_mm: 380, threshold: 70 },
-      { time: '2024-07-29 18:00', risk_score: 89, rainfall_mm: 440, threshold: 70 },
-      { time: '2024-07-30 02:00', risk_score: 96, rainfall_mm: 510, threshold: 70, is_event_time: true },
-      { time: '2024-07-30 06:00', risk_score: 94, rainfall_mm: 480, threshold: 70 },
-      { time: '2024-07-30 12:00', risk_score: 86, rainfall_mm: 320, threshold: 70 }
-    ]
-  }
-};
+export const HISTORICAL_EVENTS_LIST = [
+  { id: 'wayanad-2024', title: 'Wayanad July 2024 (Landslides & Floods)' },
+  { id: 'kamrup-2022', title: 'Guwahati June 2022 (Urban Flash Floods & Landslides)' },
+  { id: 'shimla-2023', title: 'Shimla August 2023 (Cloudburst & Slope Failures)' },
+  { id: 'dibrugarh-2020', title: 'Dibrugarh July 2020 (Brahmaputra Embankment Breach)' },
+  { id: 'cachar-2022', title: 'Silchar June 2022 (Great Barak Valley Inundation)' },
+  { id: 'idukki-2020', title: 'Pettimudi Idukki August 2020 (Landslide)' },
+  { id: 'pathanamthitta-2018', title: 'Pathanamthitta August 2018 (Pamba River Overflow)' }
+];
+
+export function getBacktestData(eventId = 'wayanad-2024') {
+  const events = {
+    'wayanad-2024': {
+      id: 'wayanad-2024',
+      title: 'Wayanad Landslides & Floods (July 2024)',
+      district: 'Wayanad',
+      critical_threshold: 70,
+      critical_crossed: true,
+      lead_time_hours: 18,
+      official_event_time: '2024-07-30T02:00:00Z',
+      critical_crossed_time: '2024-07-29T08:00:00Z',
+      summary: 'PRAHARI-AI risk fusion engine crossed the Critical threshold 18 hours prior to official NDRF deployment and event confirmation in Meppadi & Chooralmala.',
+      timeline: [
+        { time: '2024-07-28 00:00', risk_score: 24, rainfall_mm: 35, threshold: 70 },
+        { time: '2024-07-28 06:00', risk_score: 32, rainfall_mm: 58, threshold: 70 },
+        { time: '2024-07-28 12:00', risk_score: 41, rainfall_mm: 92, threshold: 70 },
+        { time: '2024-07-28 18:00', risk_score: 53, rainfall_mm: 140, threshold: 70 },
+        { time: '2024-07-29 00:00', risk_score: 62, rainfall_mm: 195, threshold: 70 },
+        { time: '2024-07-29 06:00', risk_score: 68, rainfall_mm: 260, threshold: 70 },
+        { time: '2024-07-29 08:00', risk_score: 74, rainfall_mm: 310, threshold: 70, is_threshold_cross: true },
+        { time: '2024-07-29 12:00', risk_score: 83, rainfall_mm: 380, threshold: 70 },
+        { time: '2024-07-29 18:00', risk_score: 89, rainfall_mm: 440, threshold: 70 },
+        { time: '2024-07-30 02:00', risk_score: 96, rainfall_mm: 510, threshold: 70, is_event_time: true },
+        { time: '2024-07-30 06:00', risk_score: 94, rainfall_mm: 480, threshold: 70 },
+        { time: '2024-07-30 12:00', risk_score: 86, rainfall_mm: 320, threshold: 70 }
+      ]
+    },
+    'kamrup-2022': {
+      id: 'kamrup-2022',
+      title: 'Guwahati Urban Flash Floods & Landslides (June 2022)',
+      district: 'Kamrup Metro (Guwahati)',
+      critical_threshold: 70,
+      critical_crossed: true,
+      lead_time_hours: 14,
+      official_event_time: '2022-06-14T04:00:00Z',
+      critical_crossed_time: '2022-06-13T14:00:00Z',
+      summary: 'PRAHARI-AI identified severe urban drainage saturation and hillside slope erosion 14 hours ahead of major waterlogging in Chandmari & Zoo Road.',
+      timeline: [
+        { time: '2022-06-12 12:00', risk_score: 28, rainfall_mm: 22, threshold: 70 },
+        { time: '2022-06-12 18:00', risk_score: 36, rainfall_mm: 45, threshold: 70 },
+        { time: '2022-06-13 00:00', risk_score: 48, rainfall_mm: 88, threshold: 70 },
+        { time: '2022-06-13 06:00', risk_score: 59, rainfall_mm: 125, threshold: 70 },
+        { time: '2022-06-13 14:00', risk_score: 72, rainfall_mm: 180, threshold: 70, is_threshold_cross: true },
+        { time: '2022-06-13 20:00', risk_score: 81, rainfall_mm: 220, threshold: 70 },
+        { time: '2022-06-14 04:00', risk_score: 92, rainfall_mm: 285, threshold: 70, is_event_time: true },
+        { time: '2022-06-14 10:00', risk_score: 85, rainfall_mm: 210, threshold: 70 }
+      ]
+    },
+    'shimla-2023': {
+      id: 'shimla-2023',
+      title: 'Shimla Cloudburst & Slope Failures (August 2023)',
+      district: 'Shimla',
+      critical_threshold: 70,
+      critical_crossed: true,
+      lead_time_hours: 22,
+      official_event_time: '2023-08-14T07:00:00Z',
+      critical_crossed_time: '2023-08-13T09:00:00Z',
+      summary: 'PRAHARI-AI slope saturation telemetry crossed the critical threshold 22 hours prior to the Summer Hill Shiv Temple landslide.',
+      timeline: [
+        { time: '2023-08-12 06:00', risk_score: 22, rainfall_mm: 18, threshold: 70 },
+        { time: '2023-08-12 18:00', risk_score: 35, rainfall_mm: 42, threshold: 70 },
+        { time: '2023-08-13 00:00', risk_score: 52, rainfall_mm: 95, threshold: 70 },
+        { time: '2023-08-13 09:00', risk_score: 73, rainfall_mm: 160, threshold: 70, is_threshold_cross: true },
+        { time: '2023-08-13 18:00', risk_score: 84, rainfall_mm: 240, threshold: 70 },
+        { time: '2023-08-14 07:00', risk_score: 97, rainfall_mm: 340, threshold: 70, is_event_time: true },
+        { time: '2023-08-14 15:00', risk_score: 88, rainfall_mm: 280, threshold: 70 }
+      ]
+    },
+    'dibrugarh-2020': {
+      id: 'dibrugarh-2020',
+      title: 'Dibrugarh Brahmaputra Embankment Breach (July 2020)',
+      district: 'Dibrugarh',
+      critical_threshold: 70,
+      critical_crossed: true,
+      lead_time_hours: 16,
+      official_event_time: '2020-07-10T12:00:00Z',
+      critical_crossed_time: '2020-07-09T20:00:00Z',
+      summary: 'PRAHARI-AI river gauge trend model flagged critical inundation risk 16 hours before Maijan embankment breach.',
+      timeline: [
+        { time: '2020-07-08 12:00', risk_score: 30, rainfall_mm: 40, threshold: 70 },
+        { time: '2020-07-09 00:00', risk_score: 45, rainfall_mm: 85, threshold: 70 },
+        { time: '2020-07-09 12:00', risk_score: 61, rainfall_mm: 140, threshold: 70 },
+        { time: '2020-07-09 20:00', risk_score: 75, rainfall_mm: 195, threshold: 70, is_threshold_cross: true },
+        { time: '2020-07-10 04:00', risk_score: 86, rainfall_mm: 260, threshold: 70 },
+        { time: '2020-07-10 12:00', risk_score: 94, rainfall_mm: 310, threshold: 70, is_event_time: true },
+        { time: '2020-07-10 20:00', risk_score: 89, rainfall_mm: 270, threshold: 70 }
+      ]
+    },
+    'cachar-2022': {
+      id: 'cachar-2022',
+      title: 'Silchar Great Barak Valley Inundation (June 2022)',
+      district: 'Cachar (Silchar)',
+      critical_threshold: 70,
+      critical_crossed: true,
+      lead_time_hours: 24,
+      official_event_time: '2022-06-20T06:00:00Z',
+      critical_crossed_time: '2022-06-19T06:00:00Z',
+      summary: 'PRAHARI-AI predicted catastrophic 100% town submergence 24 hours prior to Bethukandi dyke breach in Silchar.',
+      timeline: [
+        { time: '2022-06-18 00:00', risk_score: 32, rainfall_mm: 50, threshold: 70 },
+        { time: '2022-06-18 12:00', risk_score: 46, rainfall_mm: 110, threshold: 70 },
+        { time: '2022-06-19 00:00', risk_score: 63, rainfall_mm: 190, threshold: 70 },
+        { time: '2022-06-19 06:00', risk_score: 76, rainfall_mm: 240, threshold: 70, is_threshold_cross: true },
+        { time: '2022-06-19 18:00', risk_score: 88, rainfall_mm: 330, threshold: 70 },
+        { time: '2022-06-20 06:00', risk_score: 98, rainfall_mm: 450, threshold: 70, is_event_time: true },
+        { time: '2022-06-20 18:00', risk_score: 95, rainfall_mm: 410, threshold: 70 }
+      ]
+    },
+    'idukki-2020': {
+      id: 'idukki-2020',
+      title: 'Pettimudi Idukki Landslide Disaster (August 2020)',
+      district: 'Idukki',
+      critical_threshold: 70,
+      critical_crossed: true,
+      lead_time_hours: 20,
+      official_event_time: '2020-08-06T22:00:00Z',
+      critical_crossed_time: '2020-08-06T02:00:00Z',
+      summary: 'PRAHARI-AI soil moisture saturation index crossed 70 critical mark 20 hours prior to Pettimudi tea estate landslide.',
+      timeline: [
+        { time: '2020-08-05 06:00', risk_score: 25, rainfall_mm: 30, threshold: 70 },
+        { time: '2020-08-05 18:00', risk_score: 42, rainfall_mm: 85, threshold: 70 },
+        { time: '2020-08-06 02:00', risk_score: 73, rainfall_mm: 175, threshold: 70, is_threshold_cross: true },
+        { time: '2020-08-06 12:00', risk_score: 85, rainfall_mm: 260, threshold: 70 },
+        { time: '2020-08-06 22:00', risk_score: 95, rainfall_mm: 370, threshold: 70, is_event_time: true },
+        { time: '2020-08-07 08:00', risk_score: 90, rainfall_mm: 310, threshold: 70 }
+      ]
+    },
+    'pathanamthitta-2018': {
+      id: 'pathanamthitta-2018',
+      title: 'Pathanamthitta Pamba River Inundation (August 2018)',
+      district: 'Pathanamthitta',
+      critical_threshold: 70,
+      critical_crossed: true,
+      lead_time_hours: 19,
+      official_event_time: '2018-08-16T08:00:00Z',
+      critical_crossed_time: '2018-08-15T13:00:00Z',
+      summary: 'PRAHARI-AI multi-dam discharge model issued 19-hour early warning for Ranni & Kozhencherry downstream flooding.',
+      timeline: [
+        { time: '2018-08-14 12:00', risk_score: 28, rainfall_mm: 45, threshold: 70 },
+        { time: '2018-08-15 00:00', risk_score: 44, rainfall_mm: 105, threshold: 70 },
+        { time: '2018-08-15 13:00', risk_score: 74, rainfall_mm: 210, threshold: 70, is_threshold_cross: true },
+        { time: '2018-08-15 22:00', risk_score: 86, rainfall_mm: 310, threshold: 70 },
+        { time: '2018-08-16 08:00', risk_score: 96, rainfall_mm: 420, threshold: 70, is_event_time: true },
+        { time: '2018-08-16 18:00', risk_score: 91, rainfall_mm: 380, threshold: 70 }
+      ]
+    }
+  };
+
+  const selectedEvent = events[eventId] || events['wayanad-2024'];
+
+  return {
+    events_list: HISTORICAL_EVENTS_LIST,
+    active_event: selectedEvent
+  };
+}
+
+export const MOCK_BACKTEST = getBacktestData('wayanad-2024');
 
 export const MOCK_DATA_SOURCES = [
   {
