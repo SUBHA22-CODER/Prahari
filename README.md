@@ -40,25 +40,25 @@ PRAHARI-AI is a **Proactive Multi-Hazard Impact-Based Decision Intelligence Co-P
 ```mermaid
 flowchart TD
     subgraph Layer1 ["1. Multi-Hazard Live Ingestion"]
-        IMD[IMD / Open-Meteo Weather API] --> Fusion Engine
-        USGS[USGS Real-Time Earthquakes] --> Fusion Engine
-        NASA[NASA FIRMS Thermal Satellites] --> Fusion Engine
-        ISRO[ISRO Bhuvan 30m DEM Elevation] --> Fusion Engine
+        IMD["IMD / Open-Meteo Weather API"] --> FE["Risk Fusion Engine"]
+        USGS["USGS Real-Time Earthquakes"] --> FE
+        NASA["NASA FIRMS Thermal Satellites"] --> FE
+        ISRO["ISRO Bhuvan 30m DEM Elevation"] --> FE
     end
 
     subgraph Layer2 ["2. Risk Fusion & Scoring Engine"]
-        Fusion Engine --> RiskScore["Multi-Factor Equation: Rainfall + River + Slope + History"]
+        FE --> RiskScore["Multi-Factor Equation: Rainfall + River + Slope + History"]
         RiskScore --> Categorization["Ward Classification: CRITICAL (>=70) | ALERT (40-69) | MONITOR (<40)"]
     end
 
     subgraph Layer3 ["3. Decision & Dissemination Layer"]
-        Categorization -->|Risk >= 70| CAPGen[Generate ITU CAP v1.2 JSON & XML Payload]
-        CAPGen --> BrevoAPI[Brevo REST API v3 Dispatch]
+        Categorization -->|Risk >= 70| CAPGen["Generate ITU CAP v1.2 JSON & XML Payload"]
+        CAPGen --> BrevoAPI["Brevo REST API v3 Dispatch"]
         BrevoAPI --> Inbox["EOC Duty Officers Inbox (with 3-Tap Verification Links)"]
     end
 
     subgraph Layer4 ["4. Closed-Loop Machine Learning Recalibration"]
-        Inbox -->|Officer Clicks Feedback| Callback[GET /api/v1/feedback/submit]
+        Inbox -->|Officer Clicks Feedback| Callback["GET /api/v1/feedback/submit"]
         Callback --> RLWeights["Reinforcement Learning Recalibration (-10% Penalty / +5% Boost)"]
         Callback --> ToastPush["Live Floating Push Toast Banner on Command Dashboard"]
         Callback --> DynamicChart["Dynamic Recalibration Chart Update (False Alarms: 24.0% -> 13.2%)"]
