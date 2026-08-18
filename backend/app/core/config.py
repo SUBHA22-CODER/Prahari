@@ -52,7 +52,14 @@ class Settings(BaseSettings):
     # ─── Brevo SMTP Email Integration ────────────────────────────────────────
     brevo_smtp_login: str = ""
     brevo_smtp_key: str = ""
-    brevo_sender_email: str = "prahari.ai@gmail.com"
+    brevo_sender_email: str = "decodinggen07@gmail.com"
+
+    # ─── Twilio Voice Call & Dispatch ───────────────────────────────────────
+    twilio_account_sid: str = ""
+    twilio_auth_token: str = ""
+    twilio_from_number: str = ""
+    ndrf_lead_phone: str = "+919876543210"
+    ndrf_lead_email: str = "decodinggen07@gmail.com"
 
     # ─── App ─────────────────────────────────────────────────────────────────
     app_env: str = "development"

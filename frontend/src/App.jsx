@@ -10,6 +10,7 @@ import FeedbackPage from './pages/FeedbackPage';
 import DataSourcesPage from './pages/DataSourcesPage';
 import SystemStatusPage from './pages/SystemStatusPage';
 import EmailBroadcastPage from './pages/EmailBroadcastPage';
+import RescueIntelPage from './pages/RescueIntelPage';
 import { Menu, BellRing, X, ArrowRight } from 'lucide-react';
 import { api } from './services/api';
 
@@ -174,6 +175,7 @@ export default function App() {
                 <Route path="/backtest" element={<BacktestPage selectedDistrict={selectedDistrict} />} />
                 <Route path="/feedback" element={<FeedbackPage selectedDistrict={selectedDistrict} />} />
                 <Route path="/email-alerts" element={<EmailBroadcastPage selectedDistrict={selectedDistrict} />} />
+                <Route path="/rescue-intel" element={<RescueIntelPage selectedDistrict={selectedDistrict} />} />
                 <Route path="/data-sources" element={<DataSourcesPage selectedDistrict={selectedDistrict} />} />
                 <Route path="/system" element={<SystemStatusPage />} />
               </Routes>

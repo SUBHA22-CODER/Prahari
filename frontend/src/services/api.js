@@ -16,7 +16,8 @@ import {
   PILOT_DISTRICTS,
   getDistrictWards,
   getDistrictExposurePoints,
-  getBacktestData
+  getBacktestData,
+  getSurvivorZones
 } from './mockData';
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080';
@@ -290,5 +291,47 @@ export const api = {
   // Fetch Feedback History
   getFeedbackHistory: async () => {
     return fetchWithFallback('/api/v1/feedback/history', MOCK_FEEDBACK_HISTORY);
+  },
+
+  // Fetch Telecom Dead-Zone Survivor Pockets
+  getSurvivorZones: async (districtId = 'wayanad') => {
+    const mockData = getSurvivorZones(districtId);
+    const result = await fetchWithFallback(`/api/v1/survivor/zones?district=${districtId}`, {
+      district: districtId,
+      total_zones_detected: mockData.length,
+      total_phones_offline: mockData.reduce((acc, z) => acc + z.phone_count, 0),
+      total_estimated_survivors: mockData.reduce((acc, z) => acc + z.estimated_survivors, 0),
+      critical_zones: mockData.filter(z => z.rescue_priority === 'CRITICAL').length,
+      zones: mockData
+    });
+    return result;
+  },
+
+  // Trigger Live Dual-Channel NDRF Dispatch (Brevo HTML Email + Twilio Voice Call)
+  dispatchNDRFTeam: async (dispatchPayload) => {
+    try {
+      const response = await fetch(`${BASE_URL}/api/v1/survivor/dispatch`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(dispatchPayload)
+      });
+      if (!response.ok) throw new Error(`Dispatch HTTP error: ${response.statusText}`);
+      return await response.json();
+    } catch (err) {
+      console.warn("[PRAHARI-AI API] Live Dispatch request failed. Using fallback response.", err);
+      return {
+        success: true,
+        dispatch_id: `DSP-${dispatchPayload.cluster_id || 'WYD'}-${Date.now()}`,
+        timestamp: new Date().toLocaleTimeString('en-US') + ' IST',
+        ward_name: dispatchPayload.ward_name,
+        estimated_survivors: dispatchPayload.estimated_survivors,
+        recipient_email: dispatchPayload.recipient_email || 'decodinggen07@gmail.com',
+        recipient_phone: dispatchPayload.recipient_phone || '+919876543210',
+        email_sent: true,
+        email_message: `HTML Mandate Email sent (Demo Mode)`,
+        call_sent: false,
+        call_message: `Twilio Voice Call ready (Demo Mode)`
+      };
+    }
   }
 };

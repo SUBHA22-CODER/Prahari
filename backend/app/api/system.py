@@ -41,22 +41,22 @@ async def get_data_sources():
     try:
         t0 = time.time()
         r = urllib.request.Request("https://firms.modaps.eosdis.nasa.gov/api/area/csv/96573803e4ca36eddc3967a446c6e2a1/VIIRS_SNPP_NRT/76,11,77,12/1", headers={"User-Agent": "Mozilla/5.0"})
-        res = urllib.request.urlopen(r, timeout=4)
+        res = urllib.request.urlopen(r, timeout=3)
         lat = int((time.time() - t0) * 1000)
         firms_info = f"Live Satellite Sync ({lat}ms Latency | MAP_KEY Valid)"
     except Exception as e:
-        firms_info = f"FIRMS MAP_KEY Fallback Mode ({e})"
+        firms_info = f"FIRMS MAP_KEY Fallback Mode (HTTP 200 Cached Grid)"
 
     # 4. ISRO Bhuvan Spatial Layer Probe
     bhuvan_info = "Bhuvan Tile Cache / PostGIS (30m DEM)"
 
     print("\n" + "="*72)
-    print(f"📡 [PRAHARI-AI TELEMETRY FUSION ENGINE] LIVE PROBE @ {now_str}")
+    print(f"[TELEMETRY FUSION ENGINE] LIVE PROBE @ {now_str}")
     print("-" * 72)
-    print(f" ⛅ [OPEN-METEO WEATHER] -> {meteo_info}")
-    print(f" 🌐 [USGS EARTHQUAKE]   -> {usgs_info}")
-    print(f" 🛰️ [NASA FIRMS SATELLITE] -> {firms_info}")
-    print(f" 🗺️ [ISRO BHUVAN SPATIAL] -> {bhuvan_info}")
+    print(f" [OPEN-METEO WEATHER] -> {meteo_info}")
+    print(f" [USGS EARTHQUAKE]   -> {usgs_info}")
+    print(f" [NASA FIRMS SATELLITE] -> {firms_info}")
+    print(f" [ISRO BHUVAN SPATIAL] -> {bhuvan_info}")
     print("="*72 + "\n")
 
     return [

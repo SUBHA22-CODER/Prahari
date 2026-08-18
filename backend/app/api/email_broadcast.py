@@ -149,7 +149,7 @@ async def send_email_alert(req: EmailAlertRequest):
         }
 
         req_obj = urllib.request.Request(url, data=json.dumps(payload).encode("utf-8"), headers=headers)
-        res_data = urllib.request.urlopen(req_obj, timeout=4).read().decode()
+        res_data = urllib.request.urlopen(req_obj, timeout=12).read().decode()
         
         print(f"Brevo REST API Response: {res_data}")
 

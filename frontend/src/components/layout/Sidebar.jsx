@@ -10,7 +10,8 @@ import {
   Activity,
   ShieldAlert,
   ChevronRight,
-  Mail
+  Mail,
+  Radio
 } from 'lucide-react';
 
 export default function Sidebar({ isOpen, onClose, selectedDistrict = 'wayanad' }) {
@@ -51,7 +52,8 @@ export default function Sidebar({ isOpen, onClose, selectedDistrict = 'wayanad' 
       items: [
         { path: '/risk-map', label: 'Risk Map', icon: Map },
         { path: '/alerts', label: 'Alerts', icon: AlertTriangle, badge: activeAlertsCount.toString() },
-        { path: '/email-alerts', label: 'Email Alerts', icon: Mail }
+        { path: '/email-alerts', label: 'Email Alerts', icon: Mail },
+        { path: '/rescue-intel', label: 'Rescue Intel', icon: Radio }
       ]
     },
     {

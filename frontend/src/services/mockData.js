@@ -15,7 +15,7 @@ export const PILOT_DISTRICTS = [
 
 export function getDistrictWards(districtId = 'wayanad') {
   const dist = PILOT_DISTRICTS.find(d => d.id === districtId) || PILOT_DISTRICTS[0];
-  
+
   if (dist.id === 'wayanad') {
     return MOCK_WARDS;
   }
@@ -126,6 +126,51 @@ export function getDistrictWards(districtId = 'wayanad') {
       }
     };
   });
+}
+
+/**
+ * getSurvivorZones — Simulated CDR Dropout Cluster Data
+ * In production: fed by BSNL/Airtel/Jio CDR dropout streams via DoT NDMA Integration API.
+ * Each cluster = a zone where phones went silent simultaneously after a disaster.
+ */
+export function getSurvivorZones(districtId = 'wayanad') {
+  const dist = PILOT_DISTRICTS.find(d => d.id === districtId) || PILOT_DISTRICTS[0];
+
+  const zones = {
+    wayanad: [
+      { id: 'SZ-WYD-001', ward_name: 'Ward 14 (Meppadi / Chooralmala)', lat: 11.538, lng: 76.054, phone_count: 47, operator: 'BSNL / Jio', dropout_time: '02:04:17', radius_m: 200, probability: 94, rescue_priority: 'CRITICAL', estimated_survivors: 42, tower_id: 'KL-WYD-BTS-114' },
+      { id: 'SZ-WYD-002', ward_name: 'Ward 11 (Mundakkai / Vellarimala)', lat: 11.561, lng: 76.061, phone_count: 31, operator: 'Airtel / BSNL', dropout_time: '02:06:43', radius_m: 150, probability: 88, rescue_priority: 'HIGH', estimated_survivors: 27, tower_id: 'KL-WYD-BTS-108' },
+      { id: 'SZ-WYD-003', ward_name: 'Ward 08 (Kaniyambetta / Ambalavayal)', lat: 11.623, lng: 76.143, phone_count: 19, operator: 'Jio / Vi', dropout_time: '02:11:05', radius_m: 120, probability: 79, rescue_priority: 'HIGH', estimated_survivors: 16, tower_id: 'KL-WYD-BTS-082' }
+    ],
+    kamrup: [
+      { id: 'SZ-KMR-001', ward_name: 'Ward 04 (Chandmari / Zoo Road)', lat: 26.154, lng: 91.746, phone_count: 63, operator: 'BSNL / Airtel', dropout_time: '06:22:11', radius_m: 250, probability: 91, rescue_priority: 'CRITICAL', estimated_survivors: 57, tower_id: 'AS-KMR-BTS-204' },
+      { id: 'SZ-KMR-002', ward_name: 'Ward 08 (Jalukbari / Pandu)', lat: 26.124, lng: 91.716, phone_count: 38, operator: 'Jio / BSNL', dropout_time: '06:25:33', radius_m: 180, probability: 85, rescue_priority: 'HIGH', estimated_survivors: 34, tower_id: 'AS-KMR-BTS-188' },
+      { id: 'SZ-KMR-003', ward_name: 'Ward 01 (Bharalumukh / Fancy Bazar)', lat: 26.164, lng: 91.756, phone_count: 24, operator: 'Vi / Airtel', dropout_time: '06:29:47', radius_m: 140, probability: 76, rescue_priority: 'MEDIUM', estimated_survivors: 21, tower_id: 'AS-KMR-BTS-171' }
+    ],
+    cachar: [
+      { id: 'SZ-CAC-001', ward_name: 'Ward 06 (Barak Riverbank / Tarapur)', lat: 24.843, lng: 92.788, phone_count: 55, operator: 'BSNL / Jio', dropout_time: '08:14:22', radius_m: 220, probability: 92, rescue_priority: 'CRITICAL', estimated_survivors: 49, tower_id: 'AS-CAC-BTS-106' },
+      { id: 'SZ-CAC-002', ward_name: 'Ward 02 (Rangirkhari / Silchar Town)', lat: 24.823, lng: 92.768, phone_count: 41, operator: 'Airtel / BSNL', dropout_time: '08:17:09', radius_m: 160, probability: 86, rescue_priority: 'HIGH', estimated_survivors: 37, tower_id: 'AS-CAC-BTS-092' },
+      { id: 'SZ-CAC-003', ward_name: 'Ward 08 (Ambicapatty / Public School)', lat: 24.853, lng: 92.798, phone_count: 22, operator: 'Jio / Vi', dropout_time: '08:21:44', radius_m: 110, probability: 74, rescue_priority: 'MEDIUM', estimated_survivors: 19, tower_id: 'AS-CAC-BTS-078' }
+    ],
+    dibrugarh: [
+      { id: 'SZ-DIB-001', ward_name: 'Ward 03 (Brahmaputra Embankment / Maijan)', lat: 27.482, lng: 94.922, phone_count: 44, operator: 'BSNL / Airtel', dropout_time: '04:33:15', radius_m: 190, probability: 89, rescue_priority: 'CRITICAL', estimated_survivors: 39, tower_id: 'AS-DIB-BTS-133' },
+      { id: 'SZ-DIB-002', ward_name: 'Ward 07 (Chowkidinghee / Town)', lat: 27.462, lng: 94.902, phone_count: 29, operator: 'Jio / BSNL', dropout_time: '04:36:51', radius_m: 145, probability: 81, rescue_priority: 'HIGH', estimated_survivors: 26, tower_id: 'AS-DIB-BTS-117' }
+    ],
+    shimla: [
+      { id: 'SZ-SML-001', ward_name: 'Ward 05 (Summer Hill / University)', lat: 31.114, lng: 77.183, phone_count: 36, operator: 'BSNL / Airtel', dropout_time: '03:18:29', radius_m: 165, probability: 87, rescue_priority: 'CRITICAL', estimated_survivors: 32, tower_id: 'HP-SML-BTS-055' },
+      { id: 'SZ-SML-002', ward_name: 'Ward 11 (Mall Road / Ridge)', lat: 31.094, lng: 77.163, phone_count: 28, operator: 'Jio / Vi', dropout_time: '03:21:04', radius_m: 130, probability: 80, rescue_priority: 'HIGH', estimated_survivors: 25, tower_id: 'HP-SML-BTS-041' }
+    ],
+    idukki: [
+      { id: 'SZ-IDK-001', ward_name: 'Ward 12 (Munnar / Gap Road)', lat: 9.859, lng: 76.982, phone_count: 52, operator: 'BSNL / Jio', dropout_time: '05:44:18', radius_m: 210, probability: 93, rescue_priority: 'CRITICAL', estimated_survivors: 47, tower_id: 'KL-IDK-BTS-212' },
+      { id: 'SZ-IDK-002', ward_name: 'Ward 08 (Cheruthoni Dam Site)', lat: 9.829, lng: 76.952, phone_count: 34, operator: 'Airtel / BSNL', dropout_time: '05:48:55', radius_m: 155, probability: 84, rescue_priority: 'HIGH', estimated_survivors: 30, tower_id: 'KL-IDK-BTS-198' }
+    ],
+    pathanamthitta: [
+      { id: 'SZ-PTA-001', ward_name: 'Ward 08 (Ranni / Pamba Basin)', lat: 9.274, lng: 76.797, phone_count: 48, operator: 'BSNL / Airtel', dropout_time: '07:12:33', radius_m: 200, probability: 91, rescue_priority: 'CRITICAL', estimated_survivors: 43, tower_id: 'KL-PTA-BTS-108' },
+      { id: 'SZ-PTA-002', ward_name: 'Ward 03 (Konni / Elephant Reserve)', lat: 9.254, lng: 76.777, phone_count: 27, operator: 'Jio / BSNL', dropout_time: '07:15:47', radius_m: 135, probability: 82, rescue_priority: 'HIGH', estimated_survivors: 24, tower_id: 'KL-PTA-BTS-094' }
+    ]
+  };
+
+  return zones[districtId] || zones['wayanad'];
 }
 
 export const MOCK_WARDS = [
@@ -426,7 +471,7 @@ export const MOCK_WARDS = [
 
 export function getDistrictExposurePoints(districtId = 'wayanad') {
   const dist = PILOT_DISTRICTS.find(d => d.id === districtId) || PILOT_DISTRICTS[0];
-  
+
   if (dist.id === 'wayanad') {
     return MOCK_EXPOSURE_POINTS;
   }
